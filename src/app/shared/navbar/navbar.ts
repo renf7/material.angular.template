@@ -7,7 +7,6 @@ import {SECTIONS} from '../documentation-items/documentation-items';
 import {Subscription} from 'rxjs';
 import {NavigationFocusService} from '../navigation-focus/navigation-focus.service';
 import {ThemePicker} from '../theme-picker/theme-picker';
-import {VersionPicker} from '../version-picker/version-picker';
 
 const SECTIONS_KEYS = Object.keys(SECTIONS);
 
@@ -16,7 +15,7 @@ const SECTIONS_KEYS = Object.keys(SECTIONS);
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.scss'],
   standalone: true,
-  imports: [NgIf, MatButtonModule, RouterLink, NgFor, RouterLinkActive, VersionPicker, ThemePicker]
+  imports: [NgIf, MatButtonModule, RouterLink, NgFor, RouterLinkActive, ThemePicker]
 })
 export class NavBar implements OnDestroy {
   private subscriptions = new Subscription();
