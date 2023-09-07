@@ -7,7 +7,6 @@ import {DocViewerModule} from '../../shared/doc-viewer/doc-viewer-module';
 import {ComponentPageTitle} from '../page-title/page-title';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NavigationFocus} from '../../shared/navigation-focus/navigation-focus';
-import {TableOfContents} from '../../shared/table-of-contents/table-of-contents';
 import {DocViewer} from '../../shared/doc-viewer/doc-viewer';
 
 @Component({
@@ -18,7 +17,6 @@ import {DocViewer} from '../../shared/doc-viewer/doc-viewer';
   imports: [
     DocViewer,
     NavigationFocus,
-    TableOfContents,
     Footer,
   ],
 })

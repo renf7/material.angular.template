@@ -56,8 +56,6 @@ export class DocViewer implements OnDestroy {
     }
   }
 
-  @Output() contentRendered = new EventEmitter<HTMLElement>();
-
   /** The document text. It should not be HTML encoded. */
   textContent = '';
 
@@ -119,13 +117,6 @@ export class DocViewer implements OnDestroy {
     this.textContent = this._elementRef.nativeElement.textContent;
     this._loadComponents('material-docs-example', ExampleViewer);
     this._loadComponents('header-link', HeaderLink);
-
-    // Resolving and creating components dynamically in Angular happens synchronously, but since
-    // we want to emit the output if the components are actually rendered completely, we wait
-    // until the Angular zone becomes stable.
-    this._ngZone.onStable
-      .pipe(take(1))
-      .subscribe(() => this.contentRendered.next(this._elementRef.nativeElement));
   }
 
   /** Show an error that occurred when fetching a document. */

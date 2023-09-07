@@ -11,7 +11,6 @@
 @use './app/shared/example-viewer/example-viewer-theme';
 @use './app/shared/footer/footer-theme';
 @use './app/shared/navbar/navbar-theme';
-@use './app/shared/table-of-contents/table-of-contents-theme';
 @use './app/shared/cookie-popup/cookie-popup-theme';
 @use './styles/api-theme';
 @use './styles/markdown-theme';
@@ -70,6 +69,5 @@
   @include homepage-theme.theme($theme);
   @include not-found-theme.theme($theme);
   @include navbar-theme.theme($theme);
-  @include table-of-contents-theme.theme($theme);
   @include cookie-popup-theme.theme($theme);
 }

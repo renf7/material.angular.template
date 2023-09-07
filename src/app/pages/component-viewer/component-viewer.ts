@@ -25,7 +25,6 @@ import {combineLatest, Observable, ReplaySubject, Subject} from 'rxjs';
 import {map, skip, takeUntil} from 'rxjs/operators';
 import {DocViewerModule} from '../../shared/doc-viewer/doc-viewer-module';
 import {DocItem, DocumentationItems} from '../../shared/documentation-items/documentation-items';
-import {TableOfContents} from '../../shared/table-of-contents/table-of-contents';
 
 import {ComponentPageTitle} from '../page-title/page-title';
 import {NavigationFocus} from '../../shared/navigation-focus/navigation-focus';
@@ -95,8 +94,7 @@ export class ComponentViewer implements OnDestroy {
  * the table of contents headers.
  */
 @Directive()
-export class ComponentBaseView implements OnInit, OnDestroy {
-  @ViewChild('toc') tableOfContents!: TableOfContents;
+export class ComponentBaseView implements OnDestroy {
   @ViewChildren(DocViewer) viewers!: QueryList<DocViewer>;
 
   showToc: Observable<boolean>;
@@ -115,35 +113,9 @@ export class ComponentBaseView implements OnInit, OnDestroy {
       );
   }
 
-  ngOnInit() {
-    this.componentViewer.componentDocItem.pipe(takeUntil(this._destroyed)).subscribe(() => {
-      if (this.tableOfContents) {
-        this.tableOfContents.resetHeaders();
-      }
-    });
-
-    this.showToc.pipe(
-      skip(1),
-      takeUntil(this._destroyed)
-    ).subscribe(() => {
-      if (this.tableOfContents) {
-        this.viewers.forEach(viewer => {
-          viewer.contentRendered.emit(viewer._elementRef.nativeElement);
-        });
-      }
-    });
-  }
-
   ngOnDestroy() {
     this._destroyed.next();
     this._destroyed.complete();
-  }
-
-  updateTableOfContents(sectionName: string, docViewerContent: HTMLElement, sectionIndex = 0) {
-    if (this.tableOfContents) {
-      this.tableOfContents.addHeaders(sectionName, docViewerContent, sectionIndex);
-      this.tableOfContents.updateScrollPosition();
-    }
   }
 }
 
@@ -155,7 +127,6 @@ export class ComponentBaseView implements OnInit, OnDestroy {
   imports: [
     NgIf,
     DocViewer,
-    TableOfContents,
     AsyncPipe,
   ],
 })
@@ -189,7 +160,6 @@ export class ComponentOverview extends ComponentBaseView {
     NgIf,
     DocViewer,
     NgFor,
-    TableOfContents,
     AsyncPipe,
   ],
 })
