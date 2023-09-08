@@ -81,7 +81,7 @@ export class ComponentViewer implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._destroyed.next();
+    this._destroyed.next(null);
     this._destroyed.complete();
   }
 }
@@ -112,7 +112,7 @@ export class ComponentBaseView implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this._destroyed.next();
+    this._destroyed.next(null);
     this._destroyed.complete();
   }
 }
