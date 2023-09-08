@@ -8,7 +8,6 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
-  ViewChild,
   ViewChildren,
   ViewEncapsulation,
 } from '@angular/core';
@@ -29,7 +28,6 @@ import {DocItem, DocumentationItems} from '../../shared/documentation-items/docu
 import {ComponentPageTitle} from '../page-title/page-title';
 import {NavigationFocus} from '../../shared/navigation-focus/navigation-focus';
 import {DocViewer} from '../../shared/doc-viewer/doc-viewer';
-import {ExampleViewer} from '../../shared/example-viewer/example-viewer';
 
 
 @Component({
@@ -186,7 +184,6 @@ export class ComponentApi extends ComponentBaseView {
   imports: [
     NgIf,
     NgFor,
-    ExampleViewer,
     AsyncPipe,
   ],
 })
@@ -204,7 +201,6 @@ export class ComponentExamples extends ComponentBaseView {
   imports: [
     MatTabsModule,
     RouterModule,
-    DocViewerModule,
     CommonModule,
     ComponentViewer, ComponentOverview, ComponentApi, ComponentExamples,
   ],

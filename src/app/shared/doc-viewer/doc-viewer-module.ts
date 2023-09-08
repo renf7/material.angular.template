@@ -1,5 +1,4 @@
 import {DocViewer} from './doc-viewer';
-import {ExampleViewer} from '../example-viewer/example-viewer';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -9,7 +8,6 @@ import {PortalModule} from '@angular/cdk/portal';
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {HeaderLink} from './header-link';
-import {CodeSnippet} from '../example-viewer/code-snippet';
 
 
 // ExampleViewer is included in the DocViewerModule because they have a circular dependency.
@@ -23,10 +21,8 @@ import {CodeSnippet} from '../example-viewer/code-snippet';
     MatTabsModule,
     PortalModule,
     DocViewer,
-    ExampleViewer,
-    HeaderLink,
-    CodeSnippet
+    HeaderLink
   ],
-  exports: [DocViewer, ExampleViewer, HeaderLink]
+  exports: [DocViewer, HeaderLink]
 })
 export class DocViewerModule { }

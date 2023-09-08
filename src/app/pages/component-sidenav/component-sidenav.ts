@@ -186,7 +186,6 @@ const routes: Routes = [{
     CommonModule,
     ComponentCategoryListModule,
     ComponentViewerModule,
-    DocViewerModule,
     FormsModule,
     HttpClientModule,
     CdkAccordionModule,

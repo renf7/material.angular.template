@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {EXAMPLE_COMPONENTS} from '@angular/components-examples';
 
 export interface AdditionalApiDoc {
   name: string;
@@ -37,7 +36,6 @@ export interface DocSection {
   summary: string;
 }
 
-const exampleNames = Object.keys(EXAMPLE_COMPONENTS);
 const CDK = 'cdk';
 const COMPONENTS = 'components';
 export const SECTIONS: { [key: string]: DocSection } = {
@@ -596,9 +594,6 @@ export class DocumentationItems {
 function processDocs(packageName: string, docs: DocItem[]): DocItem[] {
   for (const doc of docs) {
     doc.packageName = packageName;
-    doc.examples = exampleNames.filter(key =>
-      key.match(RegExp(`^${doc.exampleSpecs.prefix}`)) &&
-      !doc.exampleSpecs.exclude?.some(excludeName => key.indexOf(excludeName) === 0));
   }
 
   return docs.sort((a, b) => a.name.localeCompare(b.name, 'en'));

@@ -54,7 +54,6 @@ const routes: Routes = [ {path : '', component : GuideViewer} ];
 // These imports may need to be updated when adding examples to new or existing guides.
 @NgModule({
   imports: [
-    DocViewerModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     GuideViewer,

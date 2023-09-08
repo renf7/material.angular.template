@@ -18,7 +18,6 @@ import {
 } from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {shareReplay, take, tap} from 'rxjs/operators';
-import {ExampleViewer} from '../example-viewer/example-viewer';
 import {HeaderLink} from './header-link';
 
 @Injectable({providedIn: 'root'})
@@ -56,32 +55,6 @@ export class DocViewer implements OnDestroy {
     }
   }
 
-  /** The document text. It should not be HTML encoded. */
-  textContent = '';
-
-  private static initExampleViewer(exampleViewerComponent: ExampleViewer,
-                                   example: string,
-                                   file: string | null,
-                                   region: string | null) {
-    exampleViewerComponent.example = example;
-    if (file) {
-      // if the html div has field `file` then it should be in compact view to show the code
-      // snippet
-      exampleViewerComponent.view = 'snippet';
-      exampleViewerComponent.showCompactToggle = true;
-      exampleViewerComponent.file = file;
-      if (region) {
-        // `region` should only exist when `file` exists but not vice versa
-        // It is valid for embedded example snippets to show the whole file (esp short files)
-        exampleViewerComponent.region = region;
-      }
-    } else {
-      // otherwise it is an embedded demo
-      exampleViewerComponent.view = 'demo';
-    }
-
-  }
-
   constructor(private _appRef: ApplicationRef,
               private _componentFactoryResolver: ComponentFactoryResolver,
               public _elementRef: ElementRef,
@@ -114,8 +87,6 @@ export class DocViewer implements OnDestroy {
       return `href="${this._domSanitizer.sanitize(SecurityContext.URL, absoluteUrl)}"`;
     });
     this._elementRef.nativeElement.innerHTML = rawDocument;
-    this.textContent = this._elementRef.nativeElement.textContent;
-    this._loadComponents('material-docs-example', ExampleViewer);
     this._loadComponents('header-link', HeaderLink);
   }
 
@@ -139,10 +110,6 @@ export class DocViewer implements OnDestroy {
           element, this._componentFactoryResolver, this._appRef, this._injector);
       const examplePortal = new ComponentPortal(componentClass, this._viewContainerRef);
       const exampleViewer = portalHost.attach(examplePortal);
-      const exampleViewerComponent = exampleViewer.instance as ExampleViewer;
-      if (example !== null) {
-        DocViewer.initExampleViewer(exampleViewerComponent, example, file, region);
-      }
       this._portalHosts.push(portalHost);
     });
   }
